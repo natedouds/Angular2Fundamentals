@@ -29,6 +29,7 @@
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
+      //package defines a default file to load and default extension for your app
       app: {
         main: './main.js',
         defaultExtension: 'js'
