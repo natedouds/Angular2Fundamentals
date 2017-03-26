@@ -6,7 +6,9 @@ import { Component } from '@angular/core'
     //pull this component into the page with a HTML selector
     selector: 'events-app',
     //what html to display when this component is loaded
-    template: '<events-list></events-list>'
+    template: `
+        <nav-bar></nav-bar>
+        <events-list></events-list>`
 })
 export class EventsAppComponent {
 
