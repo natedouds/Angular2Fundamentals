@@ -1,10 +1,6 @@
-import {Routes} from '@angular/router'
-import {EventsListComponent} from "./events/events-list.component";
-import {EventDetailsComponent} from "./events/event-details/event-details.component";
-import {CreateEventComponent} from "./events/create-event.component";
-import {Error404Component} from "./errors/404-component";
-import {EventRouteActivatorService} from "./events/shared/event-route-activator";
-import {EventsListResolverService} from "./events/events-list-resolver.service";
+import { Routes } from '@angular/router'
+import { Error404Component } from "./errors/404-component";
+import { EventsListComponent, EventDetailsComponent, CreateEventComponent, EventRouteActivatorService, EventsListResolverService } from './events/index'
 
 export const appRoutes:Routes= [
     //can activate - determine if a user can navigate to a url
@@ -24,5 +20,9 @@ export const appRoutes:Routes= [
     },
     {
         path: '404', component: Error404Component
+    },
+    {
+        //when a route starts with /user, load the user module from this path
+        path: 'user', loadChildren: 'app/user/user.module#UserModule'
     }
 ]
