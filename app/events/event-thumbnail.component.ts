@@ -3,7 +3,8 @@ import {Component, Input} from '@angular/core'
 @Component({
     selector: 'event-thumbnail',
     template:`
-        <div class="well hoverwell thumbnail">
+        <!--routerLink will bind the router link to this whole well, passing in the correct id-->
+        <div [routerLink]="['/events', event?.id]" class="well hoverwell thumbnail">
             <!--{{event.name}} is interpolation -> 1-way binding, looking for the events-list components class, and then looks for event on that object-->
             <h2>{{event?.name}}</h2>
             <div>Date: {{event?.date}}</div>

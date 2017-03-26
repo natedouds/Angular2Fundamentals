@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core'
-import { EventService } from '../shared/event.service'
+import { EventService } from './shared/event.service'
 import { ToastrService } from "../common/toastr.service";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
-    selector: 'events-list',
+    // selector: 'events-list',
     //[event] corresponds to the event in the event-thumbnail component
     //i.e. this event-thumbnail has an @Input property named event, and we want to pass our event1 value to the input
     template: `
@@ -18,13 +19,14 @@ import { ToastrService } from "../common/toastr.service";
     `
 })
 export class EventsListComponent implements OnInit{
-    events: any[]
-    constructor(private eventService: EventService, private toastr: ToastrService) {
+    events: any
+    constructor(private eventService: EventService, private toastr: ToastrService, private route:ActivatedRoute) {
 
     }
 
     ngOnInit() {
-        this.events = this.eventService.getEvents()
+        //['events'] matches the resolve property from the route class
+        this.events = this.route.snapshot.data['events'];
     }
 
     handleThumbnailClick(name) {
