@@ -18,22 +18,22 @@ import {restrictedWords} from "../shared/restricted-words.validator";
 })
 
 export class CreateSessionComponent implements OnInit {
-    @Output() saveNewSession = new EventEmitter()
-    @Output() cancelAddSession = new EventEmitter()
-    newSessionForm: FormGroup
-    name: FormControl
-    presenter: FormControl
-    duration: FormControl
-    level: FormControl
-    abstract: FormControl
+    @Output() saveNewSession = new EventEmitter();
+    @Output() cancelAddSession = new EventEmitter();
+    newSessionForm: FormGroup;
+    name: FormControl;
+    presenter: FormControl;
+    duration: FormControl;
+    level: FormControl;
+    abstract: FormControl;
 
     ngOnInit(): void {
-        this.name = new FormControl('', Validators.required)
-        this.presenter = new FormControl('', Validators.required)
-        this.duration = new FormControl('', Validators.required)
-        this.level = new FormControl('', Validators.required)
+        this.name = new FormControl('', Validators.required);
+        this.presenter = new FormControl('', Validators.required);
+        this.duration = new FormControl('', Validators.required);
+        this.level = new FormControl('', Validators.required);
         //note: the validators array is just a list of functions that should be run to validate the control
-        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), restrictedWords(['foo', 'bar'])])
+        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), restrictedWords(['foo', 'bar'])]);
 
         this.newSessionForm = new FormGroup({
             name: this.name,
@@ -41,7 +41,7 @@ export class CreateSessionComponent implements OnInit {
             duration: this.duration,
             level: this.level,
             abstract: this.abstract
-        })
+        });
     }
 
     saveSession(formValues) {
@@ -54,7 +54,7 @@ export class CreateSessionComponent implements OnInit {
             presenter: formValues.presenter,
             abstract: formValues.abstract,
             voters: []
-        }
+        };
         //output param to bind to; essentially this emits a saveNewSession event
         this.saveNewSession.emit(session)
     }

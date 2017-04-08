@@ -9,7 +9,7 @@ import { ToastrService } from "./common/toastr.service";
 import { RouterModule } from "@angular/router";
 import { appRoutes } from "./routes";
 import { Error404Component } from "./errors/404-component";
-import { EventsListComponent, EventService, EventDetailsComponent, CreateEventComponent, EventRouteActivatorService, EventsListResolverService, CreateSessionComponent } from './events/index'
+import { EventsListComponent, EventService, EventDetailsComponent, CreateEventComponent, EventRouteActivatorService, EventsListResolverService, CreateSessionComponent, DurationPipe } from './events/index'
 import {AuthService} from "./user/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SessionListComponent} from "./events/event-details/session-list.component";
@@ -28,7 +28,8 @@ import {CollapsibleWellComponent} from "./common/collapsible-well.component";
         Error404Component,
         CreateSessionComponent,
         SessionListComponent,
-        CollapsibleWellComponent
+        CollapsibleWellComponent,
+        DurationPipe
     ], //if you forget this, you'll see an error that says this is not a known element
     //this is the component that bootstraps our module
     bootstrap: [EventsAppComponent],
