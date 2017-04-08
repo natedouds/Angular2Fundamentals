@@ -13,6 +13,7 @@ import { EventsListComponent, EventService, EventDetailsComponent, CreateEventCo
 import {AuthService} from "./user/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SessionListComponent} from "./events/event-details/session-list.component";
+import {CollapsibleWellComponent} from "./common/collapsible-well.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule,RouterModule.forRoot(appRoutes)],
@@ -26,7 +27,8 @@ import {SessionListComponent} from "./events/event-details/session-list.componen
         CreateEventComponent,
         Error404Component,
         CreateSessionComponent,
-        SessionListComponent
+        SessionListComponent,
+        CollapsibleWellComponent
     ], //if you forget this, you'll see an error that says this is not a known element
     //this is the component that bootstraps our module
     bootstrap: [EventsAppComponent],

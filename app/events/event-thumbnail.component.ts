@@ -7,14 +7,14 @@ import {IEvent} from "./shared/event.model";
         <!--routerLink will bind the router link to this whole well, passing in the correct id-->
         <div [routerLink]="['/events', event?.id]" class="well hoverwell thumbnail">
             <!--{{event.name}} is interpolation -> 1-way binding, looking for the events-list components class, and then looks for event on that object-->
-            <h2>{{event?.name}}</h2>
-            <div>Date: {{event?.date}}</div>
+            <h2>{{event?.name | uppercase}}</h2>
+            <div>Date: {{event?.date | date:'shortDate'}}</div>
             <div [ngClass]="getStartTimeClass()" [ngSwitch]="event?.time">Time: {{event?.time}}
                 <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
                 <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
                 <span *ngSwitchDefault>(Normal Start)</span>
             </div>
-            <div>Price: \${{event?.price}}</div>
+            <div>Price: {{event?.price | currency:'USD':true}}</div>
             <div *ngIf="event?.location">
                 <span>Location: {{event?.location?.address}}</span>
                 <span class="pad-left">{{event?.location?.city}}: {{event?.location?.country}}</span>
