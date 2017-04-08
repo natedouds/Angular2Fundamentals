@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router'
 import { Error404Component } from "./errors/404-component";
-import { EventsListComponent, EventDetailsComponent, CreateEventComponent, EventRouteActivatorService, EventsListResolverService } from './events/index'
+import { EventsListComponent, EventDetailsComponent, CreateEventComponent, EventRouteActivatorService, EventsListResolverService, CreateSessionComponent } from './events/index'
 
 export const appRoutes:Routes= [
     //can activate - determine if a user can navigate to a url
@@ -14,6 +14,9 @@ export const appRoutes:Routes= [
     {
         //angular will create a parameter called id, which will be called id and set to that value, passed into the EventDetailsComponent
         path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivatorService]
+    },
+    {
+        path: 'events/session/new', component: CreateSessionComponent
     },
     {
         path: '', redirectTo: '/events', pathMatch: 'full'
