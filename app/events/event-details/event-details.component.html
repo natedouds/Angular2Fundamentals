@@ -21,4 +21,26 @@
             </address>
         </div>
     </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md2">
+            <h3 style="margin:0">Sessions</h3>
+        </div>
+        <div class="col-md-2">
+            <a (click)="addSession()">Add Session</a>
+        </div>
+    </div>
+
+    <session-list *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
+
+    <!--the event that is transmitted is the actual session object-->
+    <!--bind to the saveNewSession event, and when that is emitted, we call saveNewSessionToDetails (ndouds renamed for clarity) on event details component-->
+    <!--this will add the session to the event and update it-->
+    <create-session *ngIf="addMode"
+                    (saveNewSession)="saveNewSessionToDetails($event)"
+                    (cancelAddSession)="cancelAddSessionDetailsComponent()"
+    ></create-session>
+
 </div>

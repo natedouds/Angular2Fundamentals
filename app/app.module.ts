@@ -12,14 +12,30 @@ import { Error404Component } from "./errors/404-component";
 import { EventsListComponent, EventService, EventDetailsComponent, CreateEventComponent, EventRouteActivatorService, EventsListResolverService, CreateSessionComponent } from './events/index'
 import {AuthService} from "./user/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SessionListComponent} from "./events/event-details/session-list.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule,RouterModule.forRoot(appRoutes)],
     //components are declared within a module
-    declarations: [EventsAppComponent, EventsListComponent, EventThumbnailComponent, NavBarComponent, EventDetailsComponent, CreateEventComponent, Error404Component, CreateSessionComponent], //if you forget this, you'll see an error that says this is not a known element
+    declarations: [
+        EventsAppComponent,
+        EventsListComponent,
+        EventThumbnailComponent,
+        NavBarComponent,
+        EventDetailsComponent,
+        CreateEventComponent,
+        Error404Component,
+        CreateSessionComponent,
+        SessionListComponent
+    ], //if you forget this, you'll see an error that says this is not a known element
     //this is the component that bootstraps our module
     bootstrap: [EventsAppComponent],
-    providers: [EventService, ToastrService, EventRouteActivatorService, AuthService, EventsListResolverService,
+    providers: [
+        EventService,
+        ToastrService,
+        EventRouteActivatorService,
+        AuthService,
+        EventsListResolverService,
         { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState}
     ]
 })
