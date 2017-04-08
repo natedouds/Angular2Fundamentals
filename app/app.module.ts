@@ -11,9 +11,10 @@ import { appRoutes } from "./routes";
 import { Error404Component } from "./errors/404-component";
 import { EventsListComponent, EventService, EventDetailsComponent, CreateEventComponent, EventRouteActivatorService, EventsListResolverService } from './events/index'
 import {AuthService} from "./user/auth.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-    imports: [BrowserModule,RouterModule.forRoot(appRoutes)],
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule,RouterModule.forRoot(appRoutes)],
     //components are declared within a module
     declarations: [EventsAppComponent, EventsListComponent, EventThumbnailComponent, NavBarComponent, EventDetailsComponent, CreateEventComponent, Error404Component], //if you forget this, you'll see an error that says this is not a known element
     //this is the component that bootstraps our module
