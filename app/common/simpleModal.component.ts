@@ -32,13 +32,16 @@ export class SimpleModalComponent implements OnInit {
     //this elementId is a way of ensuring that our modal is a reusable component, in that the id can be set on the front end and passed back to the component, allowing for multiple instances
     //of the component, each with a unique id but shared functionality
     @Input() elementId: string;
+    @Input() closeOnBodyClick: string;
 
     //pass view child an angular2 local var ref; it's essentially a wrapper for the above DOM node. It's essentially the same thing as inject the element in the ctor
     @ViewChild('modalcontainer') containerEl: ElementRef;
 
     closeModal() {
-        //get the underlying dom element
-        this.$(this.containerEl.nativeElement).modal('hide');
+        if (this.closeOnBodyClick.toLocaleLowerCase() === 'true') {
+            //get the underlying dom element
+            this.$(this.containerEl.nativeElement).modal('hide');
+        }
     }
 
     constructor(@Inject(JQ_TOKEN) private $: any) {
