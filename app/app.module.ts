@@ -25,7 +25,9 @@ import {
     EventRouteActivatorService,
     EventsListResolverService,
     CreateSessionComponent,
-    DurationPipe
+    DurationPipe,
+    UpvoteComponent,
+    VoterService
 } from './events/index';
 import {AuthService} from "./user/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -51,7 +53,8 @@ declare let jQuery: Object;
         CollapsibleWellComponent,
         SimpleModalComponent,
         ModalTriggerDirective,
-        DurationPipe
+        DurationPipe,
+        UpvoteComponent
     ], //if you forget this, you'll see an error that says this is not a known element
     //this is the component that bootstraps our module
     bootstrap: [EventsAppComponent],
@@ -67,6 +70,7 @@ declare let jQuery: Object;
         EventRouteActivatorService,
         AuthService,
         EventsListResolverService,
+        VoterService,
         {provide: 'canDeactivateCreateEvent', useValue: checkDirtyState}
     ]
 })
