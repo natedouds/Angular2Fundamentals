@@ -42,15 +42,16 @@
                            placeholder="Search Sessions">
                 </div>
                 <!--modal-trigger is a directive, in ang2, this is only a directive-->
-                <button class="btn btn-default" modal-trigger>
+                <!--tell modal-trigger that it is the trigger for THIS specific modal dialog box-->
+                <button class="btn btn-default" modal-trigger="searchResults">
                     Search
                 </button>
             </form>
         </div>
     </div>
 </div>
-
-<simple-modal title="Matching Sessions">
+<!--elementId is an Input property-->
+<simple-modal elementId="searchResults" title="Matching Sessions">
     <div class="list-group">
         <!--events router link needs to start with / because this search could exist on any page, and the slash will indicate to navigate to the root + events path-->
         <a class="list-group-item" *ngFor="let session of foundSessions" [routerLink]="['/events', session.eventId]">{{session.name}}</a>

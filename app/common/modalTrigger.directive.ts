@@ -1,4 +1,4 @@
-import {Directive, OnInit, Inject, ElementRef} from '@angular/core';
+import {Directive, OnInit, Inject, ElementRef, Input} from '@angular/core';
 import {JQ_TOKEN} from "./jQuery.service";
 
 @Directive({
@@ -6,7 +6,8 @@ import {JQ_TOKEN} from "./jQuery.service";
     selector: '[modal-trigger]'
 })
 export class ModalTriggerDirective implements OnInit {
-
+    // '-' aren't allowed, so we can alias the input value
+    @Input('modal-trigger') modalId: string;
     private el: HTMLElement;
 
     //when this directive is constructed, I want a reference to the element that it is on
@@ -16,7 +17,7 @@ export class ModalTriggerDirective implements OnInit {
 
     ngOnInit() {
         this.el.addEventListener('click', e => {
-            this.$('#simple-modal').modal({});
+            this.$(`#${this.modalId}`).modal({});
         });
     }
 
