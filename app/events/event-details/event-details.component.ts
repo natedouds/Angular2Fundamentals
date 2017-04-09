@@ -1,37 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { EventService } from '../shared/event.service'
-import { ActivatedRoute } from '@angular/router'
+import {Component, OnInit} from '@angular/core';
+import {EventService} from '../shared/event.service'
+import {ActivatedRoute, Params} from '@angular/router'
 import {IEvent, ISession} from "../shared/event.model";
 
 @Component({
     //don't forget this is relative to the base!
     templateUrl: '/app/events/event-details/event-details.component.html',
     styles: [`
-        .container { padding-left: 20px; padding-right: 20px; }
-        .event-image { height: 100px; }
-        a { cursor:pointer }
+        .container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .event-image {
+            height: 100px;
+        }
+
+        a {
+            cursor: pointer
+        }
     `]
 })
 export class EventDetailsComponent implements OnInit {
-    event:IEvent;
+    event: IEvent;
     addMode: boolean;
     filterBy: string = 'all';
     sortBy: string = 'votes';
 
-    constructor(private eventService: EventService, private route: ActivatedRoute){}
+    constructor(private eventService: EventService, private route: ActivatedRoute) {
+    }
 
     ngOnInit(): void {
-        this.event = this.eventService.getEvent(
-            //give us params from route used to access this component, the + is a number cast operator. 'id' must match the same param name in the route
-            +this.route.snapshot.params['id']
-        );
+        this.route.params.forEach((params: Params) => {
+            //subscribe to the route params
+            this.event = this.eventService.getEvent(+params['id']);
+            //make sure that we keep track of all state properties, for example, addMode wasn't being updated on url changes, so you have to explicitly state it here
+            this.addMode = false;
+        });
+
     }
 
     addSession(): void {
         this.addMode = true
     }
 
-    saveNewSessionToDetails(session:ISession) {
+    saveNewSessionToDetails(session: ISession) {
         const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id));
         session.id = nextId + 1;
         this.event.sessions.push(session);
