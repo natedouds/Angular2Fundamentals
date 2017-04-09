@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {JQ_TOKEN} from './jQuery.service';
 
 @Component({
     selector: 'simple-modal',
     template: `
-        <div id="{{elementId}}" class="modal fade" tabindex="-1">
+        <div id="{{elementId}}" #modalcontainer class="modal fade" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -12,7 +13,7 @@ import {Component, Input, OnInit} from '@angular/core';
                         </button>
                         <h4 class="modal-title">{{title}}</h4>
                     </div>
-                    <div class="modal.body">
+                    <div class="modal-body" (click)="closeModal()">
                         <ng-content></ng-content>
                     </div>
                 </div>
@@ -32,7 +33,15 @@ export class SimpleModalComponent implements OnInit {
     //of the component, each with a unique id but shared functionality
     @Input() elementId: string;
 
-    constructor() {
+    //pass view child an angular2 local var ref; it's essentially a wrapper for the above DOM node. It's essentially the same thing as inject the element in the ctor
+    @ViewChild('modalcontainer') containerEl: ElementRef;
+
+    closeModal() {
+        //get the underlying dom element
+        this.$(this.containerEl.nativeElement).modal('hide');
+    }
+
+    constructor(@Inject(JQ_TOKEN) private $: any) {
     }
 
     ngOnInit() {
