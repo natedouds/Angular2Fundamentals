@@ -27,7 +27,8 @@ import {
     CreateSessionComponent,
     DurationPipe,
     UpvoteComponent,
-    VoterService
+    VoterService,
+    LocationValidator
 } from './events/index';
 import {AuthService} from "./user/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -54,7 +55,8 @@ declare let jQuery: Object;
         SimpleModalComponent,
         ModalTriggerDirective,
         DurationPipe,
-        UpvoteComponent
+        UpvoteComponent,
+        LocationValidator
     ], //if you forget this, you'll see an error that says this is not a known element
     //this is the component that bootstraps our module
     bootstrap: [EventsAppComponent],

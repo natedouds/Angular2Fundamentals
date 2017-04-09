@@ -7,3 +7,4 @@ export * from './events-list.component'
 export * from './shared/index'
 //export all sub components under event-details
 export * from './event-details/index'
+export * from './location-validator.directive'
