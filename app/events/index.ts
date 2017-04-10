@@ -8,3 +8,4 @@ export * from './shared/index'
 //export all sub components under event-details
 export * from './event-details/index'
 export * from './location-validator.directive'
+export * from './event-resolver.service'

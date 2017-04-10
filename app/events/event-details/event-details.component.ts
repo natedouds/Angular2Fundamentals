@@ -31,13 +31,12 @@ export class EventDetailsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.route.params.forEach((params: Params) => {
-            //subscribe to the route params
-            this.event = this.eventService.getEvent(+params['id']);
+        this.route.data.forEach((data) => {
+            //
+            this.event = data['event'];
             //make sure that we keep track of all state properties, for example, addMode wasn't being updated on url changes, so you have to explicitly state it here
             this.addMode = false;
         });
-
     }
 
     addSession(): void {
@@ -48,7 +47,7 @@ export class EventDetailsComponent implements OnInit {
         const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id));
         session.id = nextId + 1;
         this.event.sessions.push(session);
-        this.eventService.updateEvent(this.event);
+        this.eventService.saveEvent(this.event).subscribe(); //being optimistic here, assuming POST is successful, therefore aren't providing a callback to place addMode in on success
         this.addMode = false;
     }
 

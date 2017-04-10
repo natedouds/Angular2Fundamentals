@@ -1,6 +1,9 @@
 //basic angular module
 import {NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
+import {RouterModule} from "@angular/router";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpModule} from '@angular/http'
 
 //top component / container component for app
 import {EventsAppComponent} from './events-app.component'
@@ -14,7 +17,6 @@ import {
     SimpleModalComponent,
     ModalTriggerDirective
 } from "./common/index";
-import {RouterModule} from "@angular/router";
 import {appRoutes} from "./routes";
 import {Error404Component} from "./errors/404-component";
 import {
@@ -22,7 +24,7 @@ import {
     EventService,
     EventDetailsComponent,
     CreateEventComponent,
-    EventRouteActivatorService,
+    EventsResolverService,
     EventsListResolverService,
     CreateSessionComponent,
     DurationPipe,
@@ -31,7 +33,6 @@ import {
     LocationValidator
 } from './events/index';
 import {AuthService} from "./user/auth.service";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SessionListComponent} from "./events/event-details/session-list.component";
 
 //Tell TS not to worry about toastr, as it exists on the global scope
@@ -39,7 +40,7 @@ declare let toastr: Toastr;
 declare let jQuery: Object;
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes)],
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, RouterModule.forRoot(appRoutes)],
     //components are declared within a module
     declarations: [
         EventsAppComponent,
@@ -68,8 +69,8 @@ declare let jQuery: Object;
         {provide: JQ_TOKEN, useValue: jQuery},
         //note: the above provide / useValue syntax is almost the exact same thing as a normal service registration, but service registrations have a useClass property, for example:
         //I could register EventRouteActivatorService by simply placing it in the providers array, or, I could use the long hand syntax
-        {provide: EventRouteActivatorService, useClass: EventRouteActivatorService}, //when they ask for EventRouteActivatorService, provide the class EventRouteActivatorService
-        EventRouteActivatorService,
+        //{provide: EventRouteActivatorService, useClass: EventRouteActivatorService}, //when they ask for EventRouteActivatorService, provide the class EventRouteActivatorService
+        EventsResolverService,
         AuthService,
         EventsListResolverService,
         VoterService,

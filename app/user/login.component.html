@@ -3,17 +3,19 @@
 <hr>
 <div class="col-md-4">
     <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off" novalidate>
-        <div class="form-group" >
+        <div class="form-group">
             <label for="userName">User Name:</label>
             <em *ngIf="loginForm.controls.userName?.invalid
             && (loginForm.controls.userName?.touched || mouseoverLogin)">Required</em>
-            <input required (ngModel)="username" name="userName" type="text" class="form-control" id="userName" placeholder="User Name..." />
+            <input required (ngModel)="username" name="userName" type="text" class="form-control" id="userName"
+                   placeholder="User Name..."/>
         </div>
-        <div class="form-group" >
+        <div class="form-group">
             <label for="password">Password:</label>
             <em *ngIf="loginForm.controls.password?.invalid
             && (loginForm.controls.password?.touched || mouseoverLogin)">Required</em>
-            <input required (ngModel)="password" name="password" type="password" class="form-control"placeholder="Password..." id="password" />
+            <input required (ngModel)="password" name="password" type="password" class="form-control"
+                   placeholder="Password..." id="password"/>
         </div>
 
         <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
@@ -21,4 +23,6 @@
         </span>
         <button type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
     </form>
+    <br>
+    <div *ngIf="loginInvalid" class="alert alert-danger">Invalid Login Info</div>
 </div>

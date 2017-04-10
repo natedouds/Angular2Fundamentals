@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import { AuthService } from "./auth.service";
+import {AuthService} from "./auth.service";
 import {Router} from "@angular/router";
 import {Toastr, TOASTR_TOKEN} from "../common/toastr.service";
 
@@ -10,21 +10,40 @@ import {Toastr, TOASTR_TOKEN} from "../common/toastr.service";
     //note: because this is being used as a child, it doesn't appear to need the full path, perhaps because it is in the same directory as the module?
     templateUrl: 'profile.component.html',
     styles: [`
-        em {float:right; color:#E05C65; padding-left:10px;}
-        .error input {background-color: #E3C3C5}
-        .error ::-webkit-input-placeholder {color: #999}
-        .error ::-moz-placeholder {color: #999}
-        .error :-moz-placeholder {color: #999}
-        .error :ms-input-placeholder {color: #999}
+        em {
+            float: right;
+            color: #E05C65;
+            padding-left: 10px;
+        }
+
+        .error input {
+            background-color: #E3C3C5
+        }
+
+        .error ::-webkit-input-placeholder {
+            color: #999
+        }
+
+        .error ::-moz-placeholder {
+            color: #999
+        }
+
+        .error :-moz-placeholder {
+            color: #999
+        }
+
+        .error :ms-input-placeholder {
+            color: #999
+        }
     `]
 })
 export class ProfileComponent implements OnInit {
-    profileForm:FormGroup;
-    private firstName:FormControl;
-    private lastName:FormControl;
+    profileForm: FormGroup;
+    private firstName: FormControl;
+    private lastName: FormControl;
     //lookup the Toastr by its token
     //Toastr is only used for TS
-    constructor(private authSvc:AuthService, private router:Router, @Inject(TOASTR_TOKEN) private toastr: Toastr){
+    constructor(private authSvc: AuthService, private router: Router, @Inject(TOASTR_TOKEN) private toastr: Toastr) {
 
     }
 
@@ -37,11 +56,11 @@ export class ProfileComponent implements OnInit {
         })
     }
 
-    validateFirstName(){
+    validateFirstName() {
         return this.firstName.valid || this.firstName.untouched
     }
 
-    validateLastName(){
+    validateLastName() {
         return this.lastName.valid || this.lastName.untouched
     }
 
@@ -49,12 +68,18 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['/events'])
     }
 
-    saveProfile(formValues){
+    saveProfile(formValues) {
         if (this.profileForm.valid) {
-            this.authSvc.updateCurrentUser(formValues.firstName, formValues.lastName);
-            this.toastr.success('Profile Saved');
+            this.authSvc.updateCurrentUser(formValues.firstName, formValues.lastName).subscribe(() => {
+                this.toastr.success('Profile Saved');
+            });
         }
+    }
 
+    logout() {
+        this.authSvc.logout().subscribe(() => {
+            this.router.navigate(['/user/login']);
+        })
     }
 
 }

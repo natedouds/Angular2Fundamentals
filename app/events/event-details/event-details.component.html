@@ -30,8 +30,10 @@
         </div>
         <div class="col-md-7">
             <div class="btn-group btn-group-sm" style="margin-right: 20px; margin-left: 20px;">
-                <button class="btn btn-default" [class.active]="sortBy==='name'" (click)="sortBy='name'">By Name</button>
-                <button class="btn btn-default" [class.active]="sortBy==='votes'" (click)="sortBy='votes'">By Votes</button>
+                <button class="btn btn-default" [class.active]="sortBy==='name'" (click)="sortBy='name'">By Name
+                </button>
+                <button class="btn btn-default" [class.active]="sortBy==='votes'" (click)="sortBy='votes'">By Votes
+                </button>
             </div>
 
 
@@ -57,7 +59,8 @@
         </div>
     </div>
 
-    <session-list [sortBy]="sortBy" [filterBy]="filterBy" *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
+    <session-list [sortBy]="sortBy" [eventId]="event?.id" [filterBy]="filterBy" *ngIf="!addMode"
+                  [sessions]="event?.sessions"></session-list>
 
     <!--the event that is transmitted is the actual session object-->
     <!--bind to the saveNewSession event, and when that is emitted, we call saveNewSessionToDetails (ndouds renamed for clarity) on event details component-->

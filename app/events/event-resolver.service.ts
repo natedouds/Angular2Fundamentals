@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
-import {Resolve} from "@angular/router";
+import {ActivatedRouteSnapshot, Resolve} from "@angular/router";
 import {EventService} from "./shared/event.service";
 
 @Injectable()
-export class EventsListResolverService implements Resolve<any> {
+export class EventsResolverService implements Resolve<any> {
 
     constructor(private eventService: EventService) {
     }
 
-    resolve() {
+    resolve(route: ActivatedRouteSnapshot) {
         //get events returns an observable, then we call map, which gives us access to the results
-        return this.eventService.getEvents();
+        return this.eventService.getEvent(route.params['id']);
     }
 
 }
+
